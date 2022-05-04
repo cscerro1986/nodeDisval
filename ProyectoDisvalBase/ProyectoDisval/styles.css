@@ -1,0 +1,14 @@
+.login
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+}
+
+.usuario
+{
+    display: flex;
+    padding: 1rem;
+}
