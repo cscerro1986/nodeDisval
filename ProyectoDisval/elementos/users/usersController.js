@@ -2,12 +2,13 @@
 const {getAllUsersDB, registerNewUserDB, getUserDBbyId, updateUserDBbyID, deleteUserDBbyID, loginUserDB} = require("./usersModal");
 const { hashPassword, checkPassword } = require("../utils/manejoContraseñas");
 const {tokenSing,verifyToken} = require("../utils/manejoJWT");
-
+const {isAdmin} = require("../utils/validator");
 const getAllUser = async(req, res,next)=>{
     
     const {authorization} = req.headers;
     console.log(req.headers);
     if(!authorization) return res.status(401).json({message:"No tiene autorizacion papa!"});
+    if(isAdmin(req,res))
     try {
         const usuarios = await getAllUsersDB();
         if(usuarios instanceof Error)
@@ -56,7 +57,6 @@ const getUserbyID = async(req, res)=>
 //REGISTER
 const registerNewUser = async (req,res)=>{
     try {
-
         const password = await hashPassword(req.body.password);
         const dbResponse = await registerNewUserDB({...req.body,password });
         res.send(req.body);

@@ -38,6 +38,28 @@ const usernameExists = async(req, res, next)=>{
     }
 }
 
+const isAdmin = async(req,res,next)=>{
+    const queryAdmin = "SELECT * FROM users where id =?";
+    try {
+        console.log("Entro al is admin",req.body);
+        const user = await pool.query(queryAdmin, req.body.id);
+        console.log("User: ",user);
+        if(user[0].rol===1)
+        {
+            console.log("Entro al if")
+            console.log(user[0].rol);
+            next();
+        }
+        else{
+            console.log("Entro al else")
+            res.status(400).json(message="No tiene rol de administrador");
+            
+        }
+        
+    } catch (error) {
+        
+    }
+    
+}
 
-
-module.exports = {emailExistente, usernameExists};
+module.exports = {emailExistente, usernameExists, isAdmin};
