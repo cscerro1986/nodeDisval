@@ -11,6 +11,7 @@ const getAllUser = async(req, res,next)=>{
     if(isAdmin(req,res))
     try {
         const usuarios = await getAllUsersDB();
+        console.log(usuarios);
         if(usuarios instanceof Error)
         usuarios.error = error.message;
         res.send(usuarios);
@@ -20,6 +21,7 @@ const getAllUser = async(req, res,next)=>{
     }
 
 }
+
 
 // const getAllUser = async(req, res,next)=>{
 //     try {

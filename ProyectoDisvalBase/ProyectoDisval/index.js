@@ -17,6 +17,10 @@ server.get("/",(req,res)=>{
 
 // server.use("/comprobantes",require("./elementos/comprobantes/comprobantesController"));
 server.use("/user",require("./elementos/users/userRoutes"));
+server.use("/rol",require("./elementos/rol/rolRoute"));
+server.use("/categoriaProducto",require("./elementos/categoriaProducto/catProdRoutes"))
+server.use("/estadoProducto",require("./elementos/estadoProducto/estadoProductoRoute"));
+server.use("/productos",require("./elementos/productos/ProductosRoutes"));
 
 //start server
 

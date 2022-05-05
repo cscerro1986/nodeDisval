@@ -18,6 +18,7 @@ const getUserDBbyId =async (id)=>{
     const query = "SELECT * FROM users WHERE id = ?";
     try {
         const dbResponse = await pool.query(query,id);
+        console.log("El dbResponse en el modal es:",dbResponse);
         return dbResponse;
         
     } catch (error) {
