@@ -20,8 +20,8 @@ server.use("/user",require("./elementos/users/userRoutes"));
 server.use("/rol",require("./elementos/rol/rolRoute"));
 server.use("/categoriaProducto",require("./elementos/categoriaProducto/catProdRoutes"))
 server.use("/estadoProducto",require("./elementos/estadoProducto/estadoProductoRoute"));
-server.use("/productos",require("./elementos/productos/ProductosRoutes"));
-
+// server.use("/productos",require("./elementos/productos/ProductosRoutes"));
+server.use("/comprobanteAfip", require("./elementos/compAfip/compAfipRoute"));
 //start server
 
 server.listen(port, (err) => {

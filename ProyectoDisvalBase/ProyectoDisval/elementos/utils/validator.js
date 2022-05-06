@@ -62,4 +62,14 @@ const isAdmin = async(req,res,next)=>{
     
 }
 
-module.exports = {emailExistente, usernameExists, isAdmin};
+const comprobanteAfipIGuales = (compro1, compro2)=>{
+    if(compro1.tipo === compro2.tipo && compro1.fechaEmision===compro2.fechaEmision && compro1.numeroDesde ===compro2.numeroDesde &&compro1.total ===compro2.total)
+    {
+        return true;
+    }
+    return false;
+}
+
+
+
+module.exports = {emailExistente, usernameExists, isAdmin, comprobanteAfipIGuales};
