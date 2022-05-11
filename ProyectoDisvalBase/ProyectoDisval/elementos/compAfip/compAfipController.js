@@ -2,6 +2,7 @@
 const {getAllComproDB , addNewComprobanteAfipDB} = require("./compAfipModel")
 const csv = require('csv-parser')
 const fs = require('fs')
+
 const getAllCompro = async (req, res, next)=>{
     
     const dbResponse = await getAllComproDB();
@@ -27,9 +28,9 @@ const cargarArchivo = async (req, res, next)=>
 {
     console.log("Entro a cargar arhicvo")
     try {
-        await UploadCsvDataToMySQL("C:/Users/csc/Documents/PROGRAMACION 06-07/Node/apiDisval/nodeDisval/ProyectoDisvalBase/ProyectoDisval/elementos/storage/" + req.file.filename);
+        const algo = await UploadCsvDataToMySQL("C:/Users/csc/Documents/PROGRAMACION 06-07/Node/apiDisval/nodeDisval/ProyectoDisvalBase/ProyectoDisval/elementos/storage/" + req.file.filename);
         console.log('CSV file data has been uploaded in mysql database ');
-        
+        res.send(algo);
     } catch (error) {
         
     }
@@ -37,14 +38,22 @@ const cargarArchivo = async (req, res, next)=>
 
 async function UploadCsvDataToMySQL(filePath)
 {
+    const headers =(['fechaEmision','tipo','puntoDeVenta','numeroDesde','numeroHasta','codigoAutorizacion','tipoDocumento','numeroDocumentoEmisor','denominacionEmisor','tipoCambio','moneda','netoGravado','netoNoGravado','exento','iva','total']);
     let results=[];
-    fs.createReadStream(filePath)
-    .pipe(csv({ separator: ';' }))
-    .on('data', (data) => results.push(data))
+    const algo= fs.createReadStream(filePath)
+    .pipe(csv({ separator: ';',headers }))     
+    .on('data', (data) =>{
+        results.push(data)
+        console.log("la dataaaaaaaaaaaaaaaaaaaa:",data)
+    } )
     .on('end', () => { 
-        results.forEach(element=>{ addNewComprobanteAfipDB(element); })
+            results.forEach(element=>{ addNewComprobanteAfipDB(element); })
+            console.log(results);
+            return results;
   });
+
+
   
-}
+} 
 
 module.exports = {getAllCompro, addNewComprobanteAfip, cargarArchivo};
