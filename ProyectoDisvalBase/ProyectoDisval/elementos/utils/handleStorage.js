@@ -2,11 +2,11 @@ const req = require("express/lib/request");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-    
+        
         destination: (req, file, callback) => {
             console.log("Estoy en el storage")
             // const pathStorage = `${__dirname}'/../storage`;
-            const pathStorage = "C:/Users/csc/Documents/PROGRAMACION 06-07/Node/apiDisval/nodeDisval/ProyectoDisvalBase/ProyectoDisval/elementos/storage/";
+            const pathStorage = "C:/Users/Santiago/Documents/Disval/nodeDisval/ProyectoDisvalBase/ProyectoDisval/elementos/storage";
             console.log(pathStorage);
             callback(null, pathStorage)
         },
